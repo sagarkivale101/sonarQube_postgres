@@ -27,11 +27,25 @@ spec:
           ports:
             - containerPort: 9000
               name: sonarqube
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 9000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 9000
+            initialDelaySeconds: 15
+            periodSeconds: 10  
           resources:
             requests:
-              memory: 2000Mi
+              memory: 1000Mi
+              cpu: "250m"
             limits:
               memory: 2000Mi
+              cpu: "500m"          
       initContainers:
         - name: sysctl
           image: busybox
