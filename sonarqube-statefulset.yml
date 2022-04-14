@@ -13,6 +13,10 @@ spec:
       labels:
         name: sonarqube
     spec:
+      volumes:
+      - name: sonar-data
+        persistentVolumeClaim:
+          claimName: sonar-pvc
       containers:
         - image: sonarqube:7.9.1-community
           name: sonarqube
@@ -27,18 +31,21 @@ spec:
           ports:
             - containerPort: 9000
               name: sonarqube
-          readinessProbe:
-            httpGet:
-              path: /heath
-              port: 9000
-            initialDelaySeconds: 60
-            periodSeconds: 60
-          livenessProbe:
-            httpGet:
-              path: /heath
-              port: 9000
-            initialDelaySeconds: 35
-            periodSeconds: 30  
+          volumeMounts:
+          - mountPath: "/opt/sonarqube/data/"
+            name: sonar-data
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9000
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 60
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9000
+          #   initialDelaySeconds: 35
+          #   periodSeconds: 30  
           resources:
             requests:
               memory: 1000Mi

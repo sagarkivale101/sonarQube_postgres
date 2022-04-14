@@ -1,3 +1,16 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: claim-postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+
+---
+
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -11,3 +24,5 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /data/postgresql/
+
+
