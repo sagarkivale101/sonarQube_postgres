@@ -27,18 +27,18 @@ spec:
           ports:
             - containerPort: 9000
               name: sonarqube
-          # readinessProbe:
-          #   httpGet:
-          #     path: /hello
-          #     port: 9000
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 60
-          # livenessProbe:
-          #   httpGet:
-          #     path: /hello
-          #     port: 9000
-          #   initialDelaySeconds: 35
-          #   periodSeconds: 30  
+          readinessProbe:
+            httpGet:
+              path: /heath
+              port: 9000
+            initialDelaySeconds: 60
+            periodSeconds: 60
+          livenessProbe:
+            httpGet:
+              path: /heath
+              port: 9000
+            initialDelaySeconds: 35
+            periodSeconds: 30  
           resources:
             requests:
               memory: 1000Mi
