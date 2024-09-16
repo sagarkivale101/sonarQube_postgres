@@ -42,6 +42,18 @@ spec:
             # This name must match the volumes.name below.
             - name: data-disk
               mountPath: /var/lib/postgresql/data
+          readinessProbe: 
+            httpGet:
+              path: /hello
+              port: 5432
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 5432
+            initialDelaySeconds: 15
+            periodSeconds: 10    
       volumes:
         - name: data-disk
           persistentVolumeClaim:
